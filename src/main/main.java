@@ -97,33 +97,37 @@ public class main extends Application {
 		
 			@Override
 			public void handle(ActionEvent event) {
+				Thread t = new Thread(new Runnable() {
+					@Override
+					public void run() {
+						// assume that the input is always legal.
+						String number = input.getText();
+						double inputNumber = Double.parseDouble(number);
+						currentTimeBase2 = 0;
+						currentTimeBase3 = 0;
+						currentTimeBase7 = 0;
+						currentTimeBase13 = 0;
+						final String result13 = base_X(inputNumber, 13);
+						base13Field.setText(result13);
+						final String result7 = base_X(inputNumber, 7);
+						base7Field.setText(result7);
+						final String result3 = base_X(inputNumber, 3);
+						base3Field.setText(result3);
+						final String result2 = base_X(inputNumber, 2);
+						base2Field.setText(result2);
 
-				// assume that the input is always legal.
-				String number = input.getText();
-				double inputNumber = Double.parseDouble(number);
-				currentTimeBase2 = 0;
-				currentTimeBase3 = 0;
-				currentTimeBase7 = 0;
-				currentTimeBase13 = 0;
-
-				final String result2 = base_X(inputNumber,2);
-				base2Field.setText(result2);								
-				final String result3 = base_X(inputNumber,3);
-				base3Field.setText(result3);							
-				final String result7 = base_X(inputNumber,7);
-				base7Field.setText(result7);
-				final String result13 = base_X(inputNumber,13);
-				base13Field.setText(result13);	
-
-				area.setText("Base 2  : " + base2Field.getText() 
-							+ "\n" + "Base 3  : " + base3Field.getText()
-							+ "\n" + "Base 7  : " + base7Field.getText()
-							+ "\n" + "Base 13 : " + base13Field.getText()
-							);
-				chart.addItem("Base2", currentTimeBase2);
-				chart.addItem("Base3", currentTimeBase3);
-				chart.addItem("Base7", currentTimeBase7);
-				chart.addItem("Base13", currentTimeBase13);
+						area.setText("Base 2  : " + base2Field.getText()
+								+ "\n" + "Base 3  : " + base3Field.getText()
+								+ "\n" + "Base 7  : " + base7Field.getText()
+								+ "\n" + "Base 13 : " + base13Field.getText()
+						);
+						chart.addItem("Base2", currentTimeBase2);
+						chart.addItem("Base3", currentTimeBase3);
+						chart.addItem("Base7", currentTimeBase7);
+						chart.addItem("Base13", currentTimeBase13);
+					}
+				});
+				t.start();
 			}
 		});
 
